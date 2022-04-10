@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebApplication1.Models.City>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-5">List of Cities</h1>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col" >City</th>
+      <th scope="col">Population</th>
+      <th><a data-toggle="modal" data-target="#modal-create" class="btn btn-info w-20" >Create</a></th>
+    </tr>
+  </thead>
+  <tbody>
+   @foreach(var item in Model){
+  
+     <tr class="pop" name="@item.Name">
+      <td>@item.Name</td>
+      <td>@item.Population</td>
+      <td><a class="btn btn-danger w-20 text-white" id="showModal" onclick="Confirm(@item.Id)">Delete</a>
+      </td>
+    </tr>
+   }
+     </tbody>
+</table>
+<input hidden type="text" id="cityId"/>
+    @*modal for create*@
+   <div class="modal" tabindex="-1" role="dialog" id="modal-create">
+   <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create new city</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="CityData" >
+  <div class="form-row">
+    <div class="col">
+        <label>Name</label>
+      <input name="name" class="form-control" placeholder="Praha">
+    </div>
+    <div class="col">
+         <label >Population</label>
+      <input name="population" type="number" class="form-control" placeholder="150000">
+    </div>
+  </div>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@*modal for delete*@
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Delete Item</h3>
+     <table class="mx-auto">
+        <tr>
+      <td><span id="name"></span></td>
+      <td><span id="population"></span></td>
+    </tr>
+    </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnDelete">Proceed</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnDiscard">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
